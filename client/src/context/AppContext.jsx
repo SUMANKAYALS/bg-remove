@@ -13,7 +13,7 @@ const AppContextProvider = (props) => {
     const [image, setImage] = useState(false);
     const [resultImage, setResultImage] = useState(false);
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "removebg-silk.vercel.app";
     const navigate = useNavigate()
     // ✅ must exist
     const { getToken } = useAuth();
@@ -24,7 +24,7 @@ const AppContextProvider = (props) => {
             console.log("loadCreditsData triggered");
 
             const token = await getToken();
-            console.log("CLERK TOKEN:", token);
+            // console.log("CLERK TOKEN:", token);
 
             if (!token) {
                 console.log("❌ Token is null – Clerk not ready");
