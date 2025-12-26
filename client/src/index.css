@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=BBH+Bartle&display=swap');
+@import "tailwindcss";
+
+* {
+    font-family: Outfit;
+}
+
+.bg-layer {
+    background-image: url(/bg_layer.png);
+}
