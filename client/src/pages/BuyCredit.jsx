@@ -2,8 +2,21 @@ import React from "react";
 import { DollarSign } from "lucide-react";
 import { dataAssets, plans } from "../assets/assets/assets";
 import Footer from "../components/Footer";
+import { toast } from "react-toastify";
 
 function BuyCredit() {
+
+    const handlePurchase = () => {
+        toast.info(
+            "💳 Payment gateway is not added yet. This is a development demo.",
+            {
+                position: "top-center",
+                autoClose: 3000,
+                pauseOnHover: true,
+            }
+        );
+    };
+
     return (
         <>
             <section className="min-h-[80vh] pt-24 pb-16 px-4 text-center">
@@ -33,6 +46,7 @@ function BuyCredit() {
               px-8 py-10 bg-white
               hover:shadow-md transition-shadow duration-300"
                         >
+
                             {/* Logo */}
                             <img
                                 src={dataAssets.app_logo2}
@@ -50,7 +64,7 @@ function BuyCredit() {
                                 {item.desc}
                             </p>
 
-                            {/* Price with Dollar Icon */}
+                            {/* Price */}
                             <div className="flex justify-center items-end gap-1 mb-8">
                                 <DollarSign className="w-5 h-5 text-gray-700 mb-1" />
                                 <span className="text-3xl font-semibold text-gray-900">
@@ -58,12 +72,14 @@ function BuyCredit() {
                                 </span>
                             </div>
 
+                            {/* Credits */}
                             <p className="text-sm text-gray-500 mb-8">
                                 {item.credits} credits
                             </p>
 
                             {/* CTA */}
                             <button
+                                onClick={handlePurchase}
                                 className="w-full py-2.5 rounded-md
                 bg-gray-900 text-white text-sm font-medium
                 hover:bg-gray-800 transition-colors"

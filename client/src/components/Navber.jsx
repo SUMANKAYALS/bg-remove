@@ -1,12 +1,23 @@
 import React from "react";
 import { dataAssets } from "../assets/assets/assets";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import { useEffect } from "react";
 
 function Navbar() {
 
     const { openSignIn } = useClerk();
-    const { isSignedIn, user } = useUser()
+    const { isSignedIn, user } = useUser();
+    const { credit, loadCreditsData } = useContext(AppContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isSignedIn) {
+            loadCreditsData();
+        }
+    }, [isSignedIn]);
 
     return (
         <nav className="flex items-center justify-between mx-4 py-3 lg:mx-44">
@@ -21,7 +32,12 @@ function Navbar() {
             </Link>
 
             {
-                isSignedIn ? <div>
+                isSignedIn ? <div className="flex items-center gap-2 sm:gap-3">
+                    <button onClick={() => navigate("/buy")} className="flex items-center gap-2 bg-blue-100 px-4 sm:px-7 py-1.5 sm:py-2.5 rounded-full hover:scale-105 transition-all duration-700">
+                        <img className="w-5" src={dataAssets.credit_icon} alt="" />
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">Credits : {credit}</p>
+                    </button>
+                    <p className="text-gray-600 max-sm:hidden">Hi, {user.fullName}</p>
                     <UserButton />
                 </div> : <button
                     onClick={() => openSignIn({})}

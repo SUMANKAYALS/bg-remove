@@ -64,3 +64,41 @@ export const clerkWebhook = async (req, res) => {
         });
     }
 };
+
+
+// api controller function to get user available credits data
+
+export const userCredit = async (req, res) => {
+    try {
+        // ✅ clerkId comes from middleware
+        const clerkId = req.clerkId;
+
+        if (!clerkId) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized",
+            });
+        }
+
+        const userData = await userModel.findOne({ clerkId });
+
+        if (!userData) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        return res.json({
+            success: true,
+            credits: userData.creditBalance,
+        });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+

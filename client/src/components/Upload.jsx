@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { dataAssets } from "../assets/assets/assets";
+import { AppContext } from "../context/AppContext";
 
 function Upload() {
+
+    const { removeBg } = useContext(AppContext)
+
     return (
         <div className="pb-16 flex flex-col items-center text-center">
 
@@ -16,7 +20,7 @@ function Upload() {
             </h1>
 
             {/* Upload Button */}
-            <input type="file" id="upload1" hidden />
+            <input onChange={e => removeBg(e.target.files[0])} type="file" accept="image/*" id="upload1" hidden />
 
             <label
                 htmlFor="upload1"
