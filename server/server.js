@@ -12,15 +12,15 @@ const app = express();
 await connectDb();
 
 app.use(express.json());
-// app.use(cors());
-app.use(
-    cors({
-        origin: "bg-remove-pink.vercel.app", // frontend URL
-        credentials: true,
-        allowedHeaders: ["Content-Type", "Authorization"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-    })
-);
+app.use(cors());
+// app.use(
+//     cors({
+//         origin: "bg-remove-pink.vercel.app", // frontend URL
+//         credentials: true,
+//         allowedHeaders: ["Content-Type", "Authorization"],
+//         methods: ["GET", "POST", "PUT", "DELETE"],
+//     })
+// );
 
 
 
